@@ -10,4 +10,6 @@ main = do
         { manageHook = manageDocks <+> manageHook defaultConfig
         , layoutHook = avoidStruts $ layoutHook defaultConfig
         , modMask = mod4Mask      -- rebind Mod to Winkey
-        }
+        } `additionalKeys`
+        [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock") -- Mod+Shift+L = lock screen
+        ]
