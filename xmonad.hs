@@ -9,4 +9,5 @@ main = do
     xmonad $ defaultConfig
         { manageHook = manageDocks <+> manageHook defaultConfig
         , layoutHook = avoidStruts $ layoutHook defaultConfig
+        , modMask = mod4Mask      -- rebind Mod to Winkey
         }
