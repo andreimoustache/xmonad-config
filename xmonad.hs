@@ -15,6 +15,10 @@ main = do
         , handleEventHook = fullscreenEventHook
         , normalBorderColor = solarizedBase01
         , focusedBorderColor = solarizedRed
+        , terminal = "xterm"
+        , startupHook = do
+                startupHook defaultConfig
+                spawn "killall xflux; xflux -l 55 -g 4"
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock") -- Mod+Shift+L = lock screen
         ]
