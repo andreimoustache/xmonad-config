@@ -1,3 +1,4 @@
+import Graphics.X11.ExtraTypes.XF86
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -21,4 +22,7 @@ main = do
                 spawn "killall xflux; xflux -l 55 -g 4"
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock") -- Mod+Shift+L = lock screen
+        , ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
+        , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5%- unmute")
+        , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5%+ unmute ")
         ]
