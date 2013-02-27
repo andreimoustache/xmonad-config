@@ -8,6 +8,12 @@ import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 import Solarized
 
+myDmenuSolarized = ""
+        ++ " -nb '" ++ solarizedBase03 ++ "'"
+        ++ " -nf '" ++ solarizedBase00 ++ "'"
+        ++ " -sb '" ++ solarizedBase02 ++ "'"
+        ++ " -sf '" ++ solarizedOrange ++ "'"
+--
 main = do
     xmonad $ defaultConfig
         { manageHook = manageDocks <+> manageHook defaultConfig
@@ -22,6 +28,7 @@ main = do
                 spawn "killall xflux; xflux -l 55 -g 4"
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock") -- Mod+Shift+L = lock screen
+        , ((mod4Mask, xK_p), spawn $ "dmenu_run " ++ myDmenuSolarized)
         , ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
         , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5%- unmute")
         , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5%+ unmute ")
