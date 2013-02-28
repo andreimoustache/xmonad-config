@@ -3,6 +3,7 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.SetWMName
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
@@ -23,6 +24,7 @@ main = do
         , normalBorderColor = solarizedBase01
         , focusedBorderColor = solarizedRed
         , terminal = "xterm"
+        , logHook = setWMName "LG3D"
         , startupHook = do
                 startupHook defaultConfig
                 spawn "killall xflux; xflux -l 55 -g 4"
