@@ -29,7 +29,7 @@ main = do
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock") -- Mod+Shift+L = lock screen
         , ((mod4Mask, xK_p), spawn $ "dmenu_run " ++ myDmenuSolarized)
-        , ((0, xF86XK_AudioMute), spawn "amixer set Master toggle")
-        , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5%- unmute")
-        , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5%+ unmute ")
+        , ((0, xF86XK_AudioMute), spawn "amixer -D pulse set Master toggle")
+        , ((0, xF86XK_AudioLowerVolume), spawn "amixer -D pulse set Master 5%- unmute")
+        , ((0, xF86XK_AudioRaiseVolume), spawn "amixer -D pulse set Master 5%+ unmute ")
         ]
