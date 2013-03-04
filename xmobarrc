@@ -1,9 +1,9 @@
-Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+Config { font = "xft:inconsolata:size=10:antialias=true"
        , bgColor = "#002b36"
        , fgColor = "#657b83"
        , position = Top
-       , lowerOnStart = False
-       , commands = [ Run Date "<fc=#859900>%A, %d %b %l:%M:%S</fc>" "date" 10
+       , lowerOnStart = True
+       , commands = [ Run Date "<fc=#93a1a1>%A, %d %b %H:%M:%S</fc>" "date" 10
                     , Run StdinReader
                     ]
        , sepChar = "%"

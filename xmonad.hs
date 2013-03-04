@@ -27,11 +27,14 @@ main = do
         , terminal = "xterm"
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
-                        , ppTitle = xmobarColor solarizedGreen ""
-                        } --setWMName "LG3D"
+                        , ppTitle = xmobarColor solarizedYellow "". shorten 100
+                        , ppCurrent = xmobarColor solarizedYellow ""
+                        , ppSep = " | "
+                        }
         , startupHook = do
                 startupHook defaultConfig
                 spawn "killall xflux; xflux -l 55 -g 4"
+                setWMName "LG3D"
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock") -- Mod+Shift+L = lock screen
         , ((mod4Mask, xK_p), spawn $ "dmenu_run " ++ myDmenuSolarized)
