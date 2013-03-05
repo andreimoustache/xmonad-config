@@ -4,6 +4,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.SetWMName
+import XMonad.Layout.NoBorders
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
@@ -19,7 +20,7 @@ main = do
     xmproc <- spawnPipe "/usr/bin/xmobar /home/andrei/.xmonad/xmobarrc"
     xmonad $ defaultConfig
         { manageHook = manageDocks <+> manageHook defaultConfig
-        , layoutHook = avoidStruts $ layoutHook defaultConfig
+        , layoutHook = avoidStruts $ smartBorders $ layoutHook defaultConfig
         , modMask = mod4Mask      -- rebind Mod to Winkey
         , handleEventHook = fullscreenEventHook
         , normalBorderColor = solarizedBase01
@@ -33,6 +34,7 @@ main = do
                         }
         , startupHook = do
                 startupHook defaultConfig
+                spawn "xscreensaver -no-splash"
                 spawn "killall xflux; xflux -l 55 -g 4"
                 setWMName "LG3D"
         } `additionalKeys`
