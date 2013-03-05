@@ -4,9 +4,11 @@ Config { font = "xft:inconsolata:size=10:antialias=true"
        , position = Top
        , lowerOnStart = True
        , commands = [ Run Date "<fc=#93a1a1>%A, %d %b %H:%M:%S</fc>" "date" 10
+                    , Run Wireless "wlan0" ["-t", "<qualitybar>"] 10
+                    , Run Weather "EGPF" ["-t", "<tempC>C"] 10
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{    %date%"
+       , template = "%StdinReader% }%date%{   %EGPF% "
        }
