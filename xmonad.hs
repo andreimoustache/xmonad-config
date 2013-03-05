@@ -14,8 +14,9 @@ myDmenuSolarized = ""
         ++ " -nf '" ++ solarizedBase00 ++ "'"
         ++ " -sb '" ++ solarizedBase02 ++ "'"
         ++ " -sf '" ++ solarizedOrange ++ "'"
---
+
 main = do
+    xmproc <- spawnPipe "/usr/bin/xmobar /home/andrei/.xmonad/xmobarrc"
     xmonad $ defaultConfig
         { manageHook = manageDocks <+> manageHook defaultConfig
         , layoutHook = avoidStruts $ layoutHook defaultConfig
@@ -24,10 +25,16 @@ main = do
         , normalBorderColor = solarizedBase01
         , focusedBorderColor = solarizedRed
         , terminal = "xterm"
-        , logHook = setWMName "LG3D"
+        , logHook = dynamicLogWithPP xmobarPP
+                        { ppOutput = hPutStrLn xmproc
+                        , ppTitle = xmobarColor solarizedYellow "". shorten 100
+                        , ppCurrent = xmobarColor solarizedYellow ""
+                        , ppSep = " | "
+                        }
         , startupHook = do
                 startupHook defaultConfig
                 spawn "killall xflux; xflux -l 55 -g 4"
+                setWMName "LG3D"
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock") -- Mod+Shift+L = lock screen
         , ((mod4Mask, xK_p), spawn $ "dmenu_run " ++ myDmenuSolarized)
