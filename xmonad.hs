@@ -37,6 +37,7 @@ main = do
                 spawn "xscreensaver -no-splash"
                 spawn "killall xflux; xflux -l 55 -g 4"
                 setWMName "LG3D"
+                spawn "setxkbmap -option -layout 'gb,ro(std)' -option grp:alt_shift_toggle" -- toggle GB,RO keyboard layouts
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_l), spawn "xscreensaver-command -lock") -- Mod+Shift+L = lock screen
         , ((mod4Mask, xK_p), spawn $ "dmenu_run " ++ myDmenuSolarized)
